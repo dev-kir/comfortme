@@ -31,15 +31,7 @@ app.post("/comforted", (req, res) => {
 const axios = require('axios');
 app.post("/tete", async (req, res) => {
     try {
-        // Retrieve the data sent from the client-side JavaScript
-        const message = req.body.message;
-        const token = "<ENTER YOUR TOKEN 0000000:lajdlfasdfj HERE>";
-        const chat_id = "<ENTER YOUR -chat_id HERE";
-        const url = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${chat_id}&text=${message}`;
-
-        await axios.get(url);
-
-        // res.render('comforted', {});
+        await axios.get(`https://api.telegram.org/bot<token>/sendMessage?chat_id=<chat_id>&text=${req.body.message}`);
         res.status(200).json({ success: true });
 
     } catch (error) {
@@ -51,6 +43,6 @@ app.post("/tete", async (req, res) => {
 
 // END ROUTE
 
-app.listen(80, () => {
+app.listen(8000, () => {
     console.log(`Running on port 8080`);
 })
