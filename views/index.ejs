@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html 
+    lang="en"
+    class="font-inconsolata"
+    id="color-mode-toggle"
+>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Node.js Tailwind CSS</title>
+    <link rel="stylesheet" href="../assets/styles.css">
+    <link rel="icon" type="image/svg+xml" href="{{ asset('CDCS255/logo_amirmuz.svg') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@200..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+    <body class="bg-white max-w-screen-lg mx-auto flex flex-col min-h-screen">
+        <div class="px-0 py-2 sm:px-4 sm:py-4">
+            <nav class="bg-white text-zinc-900">
+                <div class="flex justify-between items-center px-2 py-3">
+                    <!-- Logo or Brand -->
+                    <div class="flex-shrink-0">
+                        <a href="https://comfortme.amirmuz.com" class="font-bold text-xl">comfortme🥺</a>
+                    </div>
+                    <!-- Hamburger icon for mobile -->
+                    <div class="block sm:hidden">
+                        <button id="mobile-menu-toggle" class="focus:outline-none">
+                            <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M4 6h16M4 12h16m-7 6h7"></path>
+                            </svg>
+                        </button>
+                    </div>
+                    <!-- Navigation Links -->
+                    <ul class="hidden sm:flex sm:gap-6 sm:items-center">
+                        <li><a href="https://github.com/dev-kir/comfortme.git" target="_blank" class="">💻code</a></li>
+                        <li><a href="https://amirmuz.com" target="_blank" class="">🧚🏼‍♂️about me</a></li>
+                    </ul>
+                </div>
+                <hr>
+                <!-- Dropdown Menu (Hidden by Default) -->
+                <div id="mobile-menu" class="sm:hidden hidden">
+                    <ul class="px-2 py-3">
+                        <li><a href="https://github.com/dev-kir/comfortme.git" target="_blank" class="block py-2">💻code</a></li>
+                        <li><a href="https://amirmuz.com" target="_blank" class="block py-2">🧚🏼‍♂️about me</a></li>
+                        <hr>
+                    </ul>
+                </div>
+            </nav>
+            
+            <script>
+                // Toggle mobile menu visibility
+                document.getElementById('mobile-menu-toggle').addEventListener('click', function () {
+                    document.getElementById('mobile-menu').classList.toggle('hidden');
+                });
+            </script>
+            
+        </div>
+
+        <div name="main" class="px-4 py-4 sm:px-4 sm:py-4 text-zinc-900 mx-auto font-light text-sm sm:text-base">
+            <div class="flex justify-center items-center py-24">
+                <img id="gifImage" class="max-w-52" alt="Animated sad peach GIF">
+            </div>
+            <div class="flex justify-center py-8">
+                <button id="sendMessageButton" class="text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:focus:ring-blue-800">comfort me, please! 🥺</button>
+            </div>
+        </div>
+
+        <footer class="bg-white m-2 mt-auto flex justify-center items-center">
+            <div class="w-full max-w-screen-xl mx-auto p-4 md:py-4 text-center">
+                <hr class="my-4 border-gray-200 sm:mx-auto lg:my-4" />
+                <span class="block text-sm text-gray-500">Each click will send a message to amirmuz.</span>
+                <span class="block text-sm text-gray-500">© 2024 <a href="https://amirmuz.com" class="hover:underline">Amirmuz™</a>. All Rights Reserved.</span>
+            </div>
+        </footer>
+    </body>
+
+    <script>
+        const sad_gifs = [
+            "../assets/gif/sad/sad-1.gif",
+            "../assets/gif/sad/sad-2.gif",
+            "../assets/gif/sad/sad-3.gif",
+            "../assets/gif/sad/sad-4.gif",
+            "../assets/gif/sad/sad-5.gif",
+            "../assets/gif/sad/sad-6.gif",
+        ];
+
+        function displayRandomGif() {
+            const randomIndex = Math.floor(Math.random() * sad_gifs.length);
+            const randomGif = sad_gifs[randomIndex];
+            document.getElementById("gifImage").src = randomGif;
+        }
+
+        window.addEventListener("load", () => {
+            displayRandomGif();
+        });
+
+        const comforted_gifs = [
+            { 
+                location: "../assets/gif/comforted/hug.gif", 
+                description: "Thank you for giving a virtual hug🥰",
+                message: "you're just get a virtual hug"
+            },
+            { 
+                location: "../assets/gif/comforted/bethere.gif", 
+                description: "Thank you for being here for me🥹",
+                message: "you're just get a accompany"
+            },
+            { 
+                location: "../assets/gif/comforted/kiss.gif", 
+                description: "you're just kiss me🫣",
+                message: "you're just got a kiss"
+            },
+            { 
+                location: "../assets/gif/comforted/hug-1.gif", 
+                description: "Thank you for another virtual hug🥰",
+                message: "you're just get another virtual hug"
+            },
+            { 
+                location: "../assets/gif/comforted/happy.gif", 
+                description: "You're just make me happy, thank you!😊",
+                message: "don't worry, be happy. I'm here with u🌚"
+            },
+            { 
+                location: "../assets/gif/comforted/pet.gif", 
+                description: "Thank you for petting me, woof woof🐶",
+                message: "you're just got a virtual pet"
+            }
+        ];
+        
+        document.getElementById("sendMessageButton").addEventListener("click", async () => {
+            try {
+                const randomIndex = Math.floor(Math.random() * comforted_gifs.length);
+                const randomGif = comforted_gifs[randomIndex];
+
+                const location = randomGif.location;
+                const description = randomGif.description;
+                const message = randomGif.message;
+
+                const response = await fetch("/tete", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({ message: randomGif.message })
+                });
+               
+                if (response.ok) {
+                    const form = document.createElement('form');
+                    form.method = 'POST';
+                    form.action = '/comforted';
+
+                    const locationInput = document.createElement('input');
+                    locationInput.type = 'hidden';
+                    locationInput.name = 'location';
+                    locationInput.value = location;
+
+                    const descriptionInput = document.createElement('input');
+                    descriptionInput.type = 'hidden';
+                    descriptionInput.name = 'description';
+                    descriptionInput.value = description;
+
+                    form.appendChild(locationInput);
+                    form.appendChild(descriptionInput);
+
+                    document.body.appendChild(form);
+                    form.submit();
+                } else {
+                    throw new Error("Failed to send message to Telegram");
+                }
+            } catch (error) {
+                console.error("Error:", error);
+            }
+        });
+
+        function Menu(e){
+          let list = document.querySelector('ul');
+          e.name === 'menu' ? (e.name = "close",list.classList.add('top-10') , list.classList.add('opacity-100')) :( e.name = "menu" ,list.classList.remove('top-10'),list.classList.remove('opacity-100'))
+        }
+    </script>
+
+</html>
