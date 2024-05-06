@@ -2,7 +2,7 @@ const express = require("express");
 const app = express();
 const path = require("path");
 const bodyParser = require('body-parser');
-
+const requestIP = require('request-ip');
 
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
@@ -11,6 +11,7 @@ app.use('/assets', express.static('assets'));
 // Add middleware to parse JSON bodies
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(requestIP.mw());
 
 // THIS IS ROUTE
 app.get("/", (req, res) => {
@@ -28,18 +29,46 @@ app.post("/comforted", (req, res) => {
     }
 });
 
+function getClientIp(req) {
+    const ipAddress = req.headers['x-forwarded-for'] ||
+        req.connection.remoteAddress ||
+        req.socket.remoteAddress ||
+        (req.connection.socket ? req.connection.socket.remoteAddress : null);
+
+    return ipAddress.split(',')[0]; // In case of multiple IP addresses, get the first one
+}
+
 const axios = require('axios');
 app.post("/tete", async (req, res) => {
     try {
-        await axios.get(`https://api.telegram.org/bot<token>/sendMessage?chat_id=<chat_id>&text=${req.body.message}`);
-        res.status(200).json({ success: true });
+        // Retry logic
+        let retries = 15; // Number of retries
+        while (retries > 0) {
+            try {
+                // const token = "<ENTER YOUR TOKEN 0000000:lajdlfasdfj HERE>";
+                // const chat_id = "<ENTER YOUR -chat_id HERE>";
 
+                const ipAddress = req.socket.remoteAddress;
+                const message = "("+ ipAddress + "): " + req.body.message;
+                await axios.get(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${chat_id}&text=${message}`);
+                res.status(200).json({ success: true });
+                return; // Exit the function after successful request
+            } catch (error) {
+                console.error("Error:", error);
+                retries--; // Decrement the number of retries
+            }
+        }
     } catch (error) {
         // Handle error
         console.error("Error:", error);
         res.status(500).send("Internal Server Error");
     }
 });
+
+// route random links to root
+app.get("*", (req, res) => {
+    res.redirect('/');
+})
 
 // END ROUTE
 

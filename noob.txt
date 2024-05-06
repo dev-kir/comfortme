@@ -1,1 +1,2 @@
 ref to deploy: https://gist.github.com/hasibdesk/a296fa59240f86421b78e79586adb264
+ref to setup: https://www.codewithharry.com/blogpost/deploy-nodejs-app-on-ubuntu/
