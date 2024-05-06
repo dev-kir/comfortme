@@ -29,15 +29,6 @@ app.post("/comforted", (req, res) => {
     }
 });
 
-function getClientIp(req) {
-    const ipAddress = req.headers['x-forwarded-for'] ||
-        req.connection.remoteAddress ||
-        req.socket.remoteAddress ||
-        (req.connection.socket ? req.connection.socket.remoteAddress : null);
-
-    return ipAddress.split(',')[0]; // In case of multiple IP addresses, get the first one
-}
-
 const axios = require('axios');
 app.post("/tete", async (req, res) => {
     try {
@@ -47,7 +38,7 @@ app.post("/tete", async (req, res) => {
             try {
                 // const token = "<ENTER YOUR TOKEN 0000000:lajdlfasdfj HERE>";
                 // const chat_id = "<ENTER YOUR -chat_id HERE>";
-
+                
                 const ipAddress = req.socket.remoteAddress;
                 const message = "("+ ipAddress + "): " + req.body.message;
                 await axios.get(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${chat_id}&text=${message}`);
