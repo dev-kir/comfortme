@@ -31,15 +31,32 @@ app.post("/comforted", (req, res) => {
 const axios = require('axios');
 app.post("/tete", async (req, res) => {
     try {
-        await axios.get(`https://api.telegram.org/bot<token>/sendMessage?chat_id=<chat_id>&text=${req.body.message}`);
-        res.status(200).json({ success: true });
+        // Retry logic
+        let retries = 15; // Number of retries
+        while (retries > 0) {
+            try {
 
+                const token = "<ENTER YOUR TOKEN 0000000:lajdlfasdfj HERE>";
+                const chat_id = "<ENTER YOUR -chat_id HERE";
+                await axios.get(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${chat_id}&text=${req.body.message}`);
+                res.status(200).json({ success: true });
+                return; // Exit the function after successful request
+            } catch (error) {
+                console.error("Error:", error);
+                retries--; // Decrement the number of retries
+            }
+        }
     } catch (error) {
         // Handle error
         console.error("Error:", error);
         res.status(500).send("Internal Server Error");
     }
 });
+
+// route random links to root
+app.get("*", (req, res) => {
+    res.redirect('/');
+})
 
 // END ROUTE
 
